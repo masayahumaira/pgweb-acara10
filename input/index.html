@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 1. Pengaturan judul halaman web -->
+    <title>Input Data Sebaran WiFi</title>
+</head>
+<body>
+    <!-- 2. Judul utama halaman formulir input -->
+    <h2>Form Input Sebaran WiFi RT/RW</h2>
+
+    <!-- 3. Elemen formulir dengan metode POST yang mengarah ke skrip input.php serta memanggil fungsi validasi JavaScript -->
+    <form action="input.php" onsubmit="return validateForm()" method="post">
+        <!-- Input data atribut spasial (Latitude & Longitude) -->
+        <label for="lat">Latitude:</label><br>
+        <input type="text" id="lat" name="latitude"><br>
+
+        <label for="long">Longitude:</label><br>
+        <input type="text" id="long" name="longitude"><br>
+
+        <!-- Input data atribut non-spasial -->
+        <label for="kelurahan">Kelurahan:</label><br>
+        <input type="text" id="kelurahan" name="kelurahan"><br>
+
+        <label for="rw">RW:</label><br>
+        <input type="text" id="rw" name="rw"><br>
+
+        <label for="rt">RT:</label><br>
+        <input type="text" id="rt" name="rt"><br>
+
+        <label for="pasang">Pasang:</label><br>
+        <input type="text" id="pasang" name="pasang"><br>
+
+        <label for="bangunan">Bangunan:</label><br>
+        <input type="text" id="bangunan" name="bangunan"><br>
+
+        <label for="alamat_lokasi">Alamat Lokasi:</label><br>
+        <textarea id="alamat_lokasi" name="alamat_lokasi" rows="3"></textarea><br><br>
+
+        <!-- Tombol submit untuk mengirim data formulir -->
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- 4. Elemen penampung pesan peringatan jika validasi JavaScript gagal -->
+    <p id="informasi" style="color: red;"></p>
+
+    <!-- 5. Skrip JavaScript untuk melakukan validasi angka pada koordinat Latitude dan Longitude -->
+    <script>
+        function validateForm() {
+            // Menangkap nilai input Latitude dan Longitude dari dokumen
+            let lat = document.getElementById("lat").value;
+            let long = document.getElementById("long").value;
+            let text = "";
+
+            // Memeriksa apakah input kosong atau bukan berupa angka (isNaN)
+            if (isNaN(lat) || lat === "" || isNaN(long) || long === "") {
+                text = "Koordinat Latitude dan Longitude harus berupa angka yang valid!";
+                document.getElementById("informasi").innerHTML = text;
+                event.preventDefault(); // Membatalkan proses submit formulir
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
